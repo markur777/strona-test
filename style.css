@@ -86,3 +86,6 @@ footer{
 a{
 	color:white;
 }
+p.nick{
+	text-shadow: 1px;
+}
