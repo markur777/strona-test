@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>strona</title>
+    <link href="style.css" rel="stylesheet">
+    <script>
+        function start()
+        {
+            document.getElementById("nr1").style.display="none";
+            document.getElementById("nr3").style.display="block";
+        }
+        var a=0
+        var b=0
+        var gteraz=0
+        var polaX=[]
+        var polaO=[]
+        var win=[[1,2,3],[4,5,6],[7,8,9]
+        ,[1,4,7],[2,5,8],[3,6,9]
+        ,[1,5,9],[3,5,7]]
+        function pole(id){
+            var pole=document.getElementById(id)
+
+            if(gteraz==0)
+            {
+                if(pole.style.backgroundImage=="")
+                {
+                    document.getElementById(id).style.backgroundImage='url("X.png")'
+                    gteraz++
+                    polaX.push(parseInt(id))
+                    a=0
+                    b=0
+                    XWin(polaX)
+                    if(gteraz==20)
+                    {}
+                    else{
+                    bot()
+                    bott()
+                    dwa()
+                    }
+                }        
+            }
+        }
+    function bot()
+    {
+        for (var i = 0; i < win.length; i++) {
+        var bota = win[i][0]
+        var botb = win[i][1]
+        var botc = win[i][2]
+
+        var botA = 0
+        var botB = 0
+        var botC = 0
+        for (var r = 0; r < polaO.length; r++) {
+
+            if (polaO[r] == bota) {
+                botA = 1
+            }
+            if (polaO[r] == botb) {
+                botB = 1
+            }
+            if (polaO[r] == botc) {
+                botC = 1
+            }}
+        if (botA == 1 && botB == 1 && botC == 0) {
+            if (document.getElementById(botc).style.backgroundImage == ""){
+            document.getElementById(botc).style.backgroundImage='url("O.png")'
+            gteraz--
+            polaO.push(parseInt(botc))
+            a=1
+            OWin(polaO)
+            return           
+        }}
+        if (botA == 1 && botB == 0 && botC == 1) {
+            if (document.getElementById(botb).style.backgroundImage == ""){
+            document.getElementById(botb).style.backgroundImage='url("O.png")'
+            gteraz--
+            polaO.push(parseInt(botb))
+            a=1
+            OWin(polaO)
+            return           
+        }}
+        if (botA == 0 && botB == 1 && botC == 1) {
+            if (document.getElementById(bota).style.backgroundImage == ""){
+            document.getElementById(bota).style.backgroundImage='url("O.png")'
+            gteraz--
+            polaO.push(parseInt(bota))
+            a=1
+            OWin(polaO)
+            return         
+        }}
+        }
+    }
+
+    function bott()
+    {
+        for (var i = 0; i < win.length; i++) {
+        var botta = win[i][0]
+        var bottb = win[i][1]
+        var bottc = win[i][2]
+
+        var bottA = 0
+        var bottB = 0
+        var bottC = 0
+        for (var r = 0; r < polaX.length; r++) {
+
+            if (polaX[r] == botta) {
+                bottA = 1
+            }
+            if (polaX[r] == bottb) {
+                bottB = 1
+            }
+            if (polaX[r] == bottc) {
+                bottC = 1
+            }}
+        if (bottA == 1 && bottB == 1 && bottC == 0) {
+            if (document.getElementById(bottc).style.backgroundImage == ""){
+            document.getElementById(bottc).style.backgroundImage='url("O.png")'
+            gteraz--
+            polaO.push(parseInt(bottc))
+            b=1
+            OWin(polaO)
+            return           
+        }}
+        if (bottA == 1 && bottB == 0 && bottC == 1) {
+            if (document.getElementById(bottb).style.backgroundImage == ""){
+            document.getElementById(bottb).style.backgroundImage='url("O.png")'
+            gteraz--
+            polaO.push(parseInt(bottb))
+            b=1
+            OWin(polaO)
+            return           
+        }}
+        if (bottA == 0 && bottB == 1 && bottC == 1) {
+            if (document.getElementById(botta).style.backgroundImage == ""){
+            document.getElementById(botta).style.backgroundImage='url("O.png")'
+            gteraz--
+            polaO.push(parseInt(botta))
+            b=1
+            OWin(polaO)
+            return         
+        }}
+        }
+
+    }
+
+    function dwa()
+    {
+        if(a==0&& b==0)
+        {
+        var random = Math.floor(Math.random() * 9) + 1
+        if (document.getElementById(random).style.backgroundImage == "") {
+            document.getElementById(random).style.backgroundImage = 'url("O.png")'
+            polaO.push(parseInt(random))
+            OWin(polaO)
+            gteraz--
+        }
+        else dwa() 
+        }
+
+    }
+
+
+    
+    function OWin(polaO) {
+    for (var i = 0; i < win.length; i++) {
+        var aO = win[i][0]
+        var bO = win[i][1]
+        var cO = win[i][2]
+
+        var maA = 0
+        var maB = 0
+        var maC = 0
+        for (var r = 0; r < polaO.length; r++) {
+
+            if (polaO[r] == aO) {
+                maA = 1
+            }
+            if (polaO[r] == bO) {
+                maB = 1
+            }
+            if (polaO[r] == cO) {
+                maC = 1
+            }
+        }
+        if (maA == 1 && maB == 1 && maC == 1) {
+            alert("wygrywa O")
+            gteraz=20
+            return
+        }}}
+function XWin(polaX) {
+
+    for (var i = 0; i < win.length; i++) {
+        var aX = win[i][0]
+        var bX = win[i][1]
+        var cX = win[i][2]
+
+        var maaA = 0
+        var maaB = 0
+        var maaC = 0
+        for (var r = 0; r < polaX.length; r++) {
+
+            if (polaX[r] == aX) {
+                maaA = 1
+            }
+            if (polaX[r] == bX) {
+                maaB = 1
+            }
+            if (polaX[r] == cX) {
+                maaC = 1
+            }
+        }
+        if (maaA == 1 && maaB == 1 && maaC == 1) {
+            alert("wygrywa X") 
+            gteraz=20
+        }}}
+
+    function reset()
+    {
+        a=0
+        b=0
+        for(var u=1;u<10;u++)
+        {
+        document.getElementById(u).style.backgroundImage=""
+        }
+        polaO=[]
+        polaX=[]
+        gteraz=0
+
+    }
+    </script>
+</head>
+<body>
+<header>
+    <h1>Kółko krzyżyk<br>gracz vs bot</h1>
+</header>
+<nav><a href="strona.html">gracz vs gracz</a>&nbsp;&nbsp;&nbsp;<a href="stronabot.html">gracz vs bot</a></nav>
+    <div class="nr1" id="nr1">
+        <br><br><input type="button" value="rozpocznij grę" onclick="start()" style="margin: auto; font-size: 30px;">   
+    </div>
+    </div>
+    <div class="nr4" id="nr3">
+        <table>
+            <tr>
+                <td id="1" onclick="pole(1)"></td>
+                <td id="2" onclick="pole(2)"></td>
+                <td id="3" onclick="pole(3)"></td>
+            </tr>
+            <tr>
+                <td id="4" onclick="pole(4)"></td>
+                <td id="5" onclick="pole(5)"></td>
+                <td id="6" onclick="pole(6)"></td>
+            </tr>
+            <tr>
+                <td id="7" onclick="pole(7)"></td>
+                <td id="8" onclick="pole(8)"></td>
+                <td id="9" onclick="pole(9)"></td>
+            </tr>
+
+            
+        </table>
+        <br><input type="button" onclick="reset()" value="reset">
+    </div>  
+<footer>&copy;mk</footer>   
+</body>
+</html>
