@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>strona</title>
+    <link href="style.css" rel="stylesheet">
+    <script>
+        var user1
+        var user2
+        var kolor1
+        var kolor2
+        function nazwa()
+        {
+            user1=document.getElementById("user1").value
+            user2=document.getElementById("user2").value          
+            if(user1=="" ||user2=="")
+                alert("nie wprowadzono nazwy")
+            else{
+                document.getElementById("nr1").style.display="none";
+                document.getElementById("nr2").style.display="block";
+            }
+        }
+
+        function kolor()
+        {
+            kolor1=document.getElementById("kolor1").value
+            kolor2=document.getElementById("kolor2").value
+            if(kolor1==kolor2)
+                alert("Nie poprawne kolory")
+            else{
+                document.getElementById("nr1").style.display="none";
+                document.getElementById("nr2").style.display="none";
+                document.getElementById("nr3").style.display="block";
+                document.getElementById("nick").innerHTML="kolej gracza "+user1;
+                document.getElementById("nr3").style.backgroundColor=kolor1;
+            }
+        }
+        var gteraz=0
+        var polaX=[]
+        var polaO=[]
+        var win=[[1,2,3],[4,5,6],[7,8,9]
+        ,[1,4,7],[2,5,8],[3,6,9]
+        ,[1,5,9],[3,5,7]]
+        function pole(id){
+            var pole=document.getElementById(id)
+
+            if(gteraz==0)
+            {
+                if(pole.style.backgroundImage=="")
+                {
+                    document.getElementById(id).style.backgroundImage='url("X.png")'
+                    gteraz++
+                    document.getElementById('nick').innerHTML="kolej gracza "+user2
+                    document.getElementById('nr3').style.backgroundColor=kolor2
+                    polaX.push(parseInt(id))
+                    XWin(polaX)
+                }        
+            }
+            else if(gteraz==1)
+            {
+                if(pole.style.backgroundImage=="")
+                {
+                    document.getElementById(id).style.backgroundImage='url("O.png")'
+                    document.getElementById('nr3').style.backgroundColor=kolor1
+                    gteraz--
+                    document.getElementById('nick').innerHTML="kolej gracza "+user1
+                    polaO.push(parseInt(id))
+                    OWin(polaO)
+
+                }    
+            }
+        }
+    function OWin(polaO) {
+
+
+    for (var i = 0; i < win.length; i++) {
+        var aO = win[i][0]
+        var bO = win[i][1]
+        var cO = win[i][2]
+
+        var maA = 0
+        var maB = 0
+        var maC = 0
+        for (var r = 0; r < polaO.length; r++) {
+
+            if (polaO[r] == aO) {
+                maA = 1
+            }
+            if (polaO[r] == bO) {
+                maB = 1
+            }
+            if (polaO[r] == cO) {
+                maC = 1
+            }
+        }
+        if (maA == 1 && maB == 1 && maC == 1) {
+            alert("wygrywa O") 
+            gteraz=20
+        }}}
+function XWin(polaX) {
+
+    for (var i = 0; i < win.length; i++) {
+        var aX = win[i][0]
+        var bX = win[i][1]
+        var cX = win[i][2]
+
+        var maaA = 0
+        var maaB = 0
+        var maaC = 0
+        for (var r = 0; r < polaX.length; r++) {
+
+            if (polaX[r] == aX) {
+                maaA = 1
+            }
+            if (polaX[r] == bX) {
+                maaB = 1
+            }
+            if (polaX[r] == cX) {
+                maaC = 1
+            }
+        }
+        if (maaA == 1 && maaB == 1 && maaC == 1) {
+            alert("wygrywa X")
+            gteraz=20
+        }}}
+    function reset()
+    {
+        a=0
+        b=0
+        for(var u=1;u<10;u++)
+        {
+        document.getElementById(u).style.backgroundImage=""
+        }
+        polaO=[]
+        polaX=[]
+        gteraz=0
+        document.getElementById("nick").innerHTML="kolej gracza "+user1;
+        document.getElementById("nr3").style.backgroundColor=kolor1;
+
+    }
+    </script>
+</head>
+<body>
+<header>
+    <h1>Kółko krzyżyk<br>gracz vs gracz</h1>
+</header>
+<nav><a href="strona.html">gracz vs gracz</a>&nbsp;&nbsp;&nbsp;<a href="stronabot.html">gracz vs bot</a></nav>
+    <div class="nr1" id="nr1">
+        <h2>Wybierz nazwę oraz kolor</h2>
+        <form>
+        <label for="user1">Podaj nazwe pierwszego gracza</label>
+        <input type="text" id="user1">
+        <label for="user2">Podaj nazwe drugiego gracza</label>
+        <input type="text" id="user2">
+        <br><br><input type="button" value="zatwierdź" onclick="nazwa()">   
+        </form> 
+    </div>
+    <div class="nr2" id="nr2">
+        <form>
+        <label for="kolor1">Wybierz kolor gracza pierwszego</label>
+        <input type="color" id="kolor1">
+        <label for="kolor2">Wybierz kolor gracza drugiego</label>
+        <input type="color" id="kolor2">
+        <br><input type="button" value="zatwierdź" onclick="kolor()">
+        </form>
+    </div>
+    <div class="nr3" id="nr3">
+        <br><p id="nick"></p>
+        <table>
+            <tr>
+                <td id="1" onclick="pole(1)"></td>
+                <td id="2" onclick="pole(2)"></td>
+                <td id="3" onclick="pole(3)"></td>
+            </tr>
+            <tr>
+                <td id="4" onclick="pole(4)"></td>
+                <td id="5" onclick="pole(5)"></td>
+                <td id="6" onclick="pole(6)"></td>
+            </tr>
+            <tr>
+                <td id="7" onclick="pole(7)"></td>
+                <td id="8" onclick="pole(8)"></td>
+                <td id="9" onclick="pole(9)"></td>
+            </tr>
+
+        </table>
+        <br><input type="button" onclick="reset()" value="reset">
+    </div>  
+
+<footer>&copy;mk</footer>   
+</body>
+</html>
